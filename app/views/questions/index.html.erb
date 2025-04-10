@@ -1,10 +1,17 @@
 <h1>Questions</h1>
+<p><%= link_to 'New Question', new_question_path %></p>
 <% @questions.each do |question| %>
+  <hr>
   <h3><%= question.title %></h3>
-
   <time datetime="<%= question.formatted_created_at  %>">
-    <%= question.formatted_created_at %> ||
-    <%= time_ago_in_words(question.created_at) %> назад
+    Создано: 
+    <%= question.formatted_created_at %> || обновлено: 
+    <%= time_ago_in_words(question.updated_at) %> назад
   </time>
-  <p><%= question.body %></p>
+  <p><%= question.body %>
+    <br>
+    <%= link_to 'Edit', edit_question_path(question) %>
+    <%= link_to 'Show', question_path(question) %>
+    <%= button_to 'Destroy', question_path(question), method: :delete, form_class: "inline-form" %>
+  </p>
 <% end %>

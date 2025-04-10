@@ -1,5 +1,7 @@
 # README
 Тестовый проект по урокам Ruby on Rails 6/7: уроки (Ilya Krukowski)
+
+Ссылка на уроки:
 https://www.youtube.com/playlist?list=PLWlFXymvoaJ_IY53-NQKwLCkR-KkZ_44-
 
 История уроков
@@ -74,3 +76,5 @@ get "/questions", to: "questions#index"
 </nav>
 <%= yield %>
 ```
+
+Создание форм, методов и маршрутов для создания, обновления и удаления вопросов 

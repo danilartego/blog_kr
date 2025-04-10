@@ -1,0 +1,9 @@
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<time datetime="<%= @question.formatted_created_at %>">
+  Created: <%= @question.formatted_created_at %> || Updated: <%= time_ago_in_words(@question.updated_at) %> ago
+</time>
+<br>
+<%= link_to 'Edit', edit_question_path(@question) %>
+<%= link_to 'Back', questions_path %>
+<%= button_to 'Destroy', question_path(@question), method: :delete, data: { confirm: 'Are you sure?' } %>
