@@ -50,6 +50,27 @@ end
 <h1>Questions</h1>
 <% @questions.each do |question| %>
   <h3><%= question.title %></h3>
+
+  <time datetime="<%= question.formatted_created_at  %>">
+    <%= question.formatted_created_at %> ||
+    <%= time_ago_in_words(question.created_at) %> назад
+  </time>
   <p><%= question.body %></p>
 <% end %>
+```
+
+Добавление маршрута для QuestionsController 
+```sh
+#config/routes.rb`: 
+get "/questions", to: "questions#index"
+```
+
+Добавление меню в представление 
+```erb
+#app/views/layouts/application.html.erb`
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Questions', questions_path %>
+</nav>
+<%= yield %>
 ```
