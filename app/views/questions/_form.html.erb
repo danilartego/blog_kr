@@ -1,13 +1,25 @@
-<%= form_with(model: @question, local: true) do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title, required: true, minlength: 5, placeholder: 'Enter question title' %>
+<%= render 'shared/errors', object: @question %>
+
+<%= form_with model: @question do |f| %>
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :title %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_field :title, placeholder: 'Title', class: 'form-control' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :body %>
-    <%= form.text_area :body, cols: 50, rows: 10, required: true, minlength: 20, placeholder: 'Enter question body' %>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :body %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_area :body, rows: 5, placeholder: 'Body',  class: 'form-control' %>
+    </div>
   </div>
-  <div>
-  <%= form.submit "Submit" %>
-  </div>
+
+  <%= f.submit "Submit question!", class: 'btn btn-primary' %>
 <% end %>
