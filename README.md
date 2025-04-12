@@ -106,6 +106,7 @@ gem "foreman"
 `rails dartsass:install`
 
 Добавление Flash сообщений в представления в контроллере
+
 `flash[:success] = "Question was successfully created."`
 
 Добавить обработку Flash сообщений в представления
@@ -117,9 +118,11 @@ gem "foreman"
 ```
 
 Добавление обработки ошибок
+
 `<% object.errors.full_messages.join(", ") if object.errors.full_messages.any? %>`
 
 
 Параметры которые нужны для обработки ошибок
+
 `render :new, status: :unprocessable_entity` and `render :edit, status: :unprocessable_entity`
 
