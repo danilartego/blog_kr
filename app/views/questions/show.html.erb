@@ -8,31 +8,26 @@
 <%= button_to 'Удалить', question_path(@question), class: "btn btn-danger mt-2", method: :delete, 
             data: { turbo_confirm: "Вы уверены?" }  %>
 
-
 <hr class="my-4">
 <h2> Создать ответ на вопрос </h2>
-<%= render 'shared/errors', object: @answer %>
-<%= form_with model: [@question, @answer] do |f| %>
-  <div class="mb-3 row">
-    <div class="col-sm-2 col-form-label">
-      <%= f.label :body %>
-    </div>
-    <div class="col-sm-10">
-      <%= f.text_area :body, class: 'form-control' %>
-    </div>
-  </div>
-  <%= f.submit 'Ответить', class: 'btn btn-primary mt-2' %>
-<% end %>
 
+<%= render 'answers/form' %>
 
 <h2 class="my-5"> Ответы на вопрос </h2>
+
 <% @answers.each do |answer| %>
-  <hr class="my-4">
-  <div class="mb-3 row">
-    <div class="col-sm-10">
-      <%= answer.body %>
-      <p class="text-muted"><%= time_ago_in_words(answer.created_at) %> ago</p>
-    </div>
-    <%= button_to 'Удалить', question_answer_path(@question, answer), class: "btn btn-danger btn-xs mt-2", method: :delete, data: { turbo_confirm: "Вы уверены?" }  %>
+<article class="mb-3 card">
+  <div class="card-body">
+    <section class="cadr=text">
+    <small><time datetime="<%= answer.formatted_created_at %>">
+    Created: <%= answer.formatted_created_at %> </time></small>
+    <p class="mt-2 mb-3"><%= answer.body %></p>
+    </section>
+
+  
+  <%= link_to 'Редактировать', edit_question_answer_path(@question, answer), class: "btn btn-info btn-sm mb-2"   %>
+  <%= button_to 'Удалить', question_answer_path(@question, answer), class: "btn btn-danger btn-sm", method: :delete, data: { turbo_confirm: "Вы уверены?" }  %>
   </div>
+  </article>
+  
 <% end %>
