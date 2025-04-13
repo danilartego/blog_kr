@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :questions
+  resources :questions do
+    resources :answers, only: %i[create destroy]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

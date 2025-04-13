@@ -105,6 +105,12 @@ gem "foreman"
 `bundler`
 `rails dartsass:install`
 
+```Prockile.dev
+web: bin/rails server -b 0.0.0.0 -p 3000
+css: bin/rails dartsass:watch
+```
+Запустить команду: `foreman start -f Procfile.dev`
+
 Добавление Flash сообщений в представления в контроллере
 
 `flash[:success] = "Question was successfully created."`
