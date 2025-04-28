@@ -26,7 +26,7 @@ class AnswersController < ApplicationController
   def update
     if @answer.update(answer_params)
       flash[:success] = "Answer was successfully updated."
-      redirect_to question_path(@question)
+      redirect_to question_path @question, anchor: "answer-#{@answer.id}" # якори не работают, почему? (rails 8.0.2) turbo stream?
     else
       render :edit, status: :unprocessable_entity
     end

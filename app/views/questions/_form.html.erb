@@ -1,7 +1,7 @@
 <%= render 'shared/errors', object: @question %>
-
 <%= form_with model: @question do |f| %>
   <div class="mb-3 row">
+
     <div class="col-sm-2 col-form-label">
       <%= f.label :title %>
     </div>
@@ -9,9 +9,11 @@
     <div class="col-sm-10">
       <%= f.text_field :title, placeholder: 'Title', class: 'form-control' %>
     </div>
+
   </div>
 
   <div class="mb-3 row">
+
     <div class="col-sm-2 col-form-label">
       <%= f.label :body %>
     </div>
@@ -19,7 +21,58 @@
     <div class="col-sm-10">
       <%= f.text_area :body, rows: 5, placeholder: 'Body',  class: 'form-control' %>
     </div>
+
   </div>
 
+  <div class="mb-3 row">
+
+    <!-- Текущие изображения -->
+    <% if @question.images.present? %>
+      <div class="current-images">
+        <h4>Текущие изображения:</h4>
+        <% @question.images.each_with_index do |image, index| %>
+          <div class="image-preview">
+            <%# <%= image_tag image.url %> %>
+            <%# <%= image_tag image.thumb.url if image.thumb.present? %> %>
+            <!-- Чекбокс для удаления -->
+            <%= check_box_tag "question[remove_images][]", index %>
+            <%= label_tag "question[remove_images_#{index}]", "Удалить" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!-- Поле для новых изображений -->
+    <div class="field">
+      <%= f.label :images %>
+      <%= f.file_field :images, multiple: true, accept: 'image/png,image/jpeg' %>
+    </div>
+
+  </div>
+
+  <div class="mb-3 row">
+
+    <!-- Текущие файлы -->
+    <% if @question.files.present? %>
+      <div class="current-files">
+        <h4>Текущие файлы:</h4>
+        <% @question.files.each_with_index do |file, index| %>
+          <div class="file-preview">
+            <%# <%= link_to File.basename(file.url), file.url %> %>
+            <!-- Чекбокс для удаления -->
+            <%= check_box_tag "question[remove_files][]", index %>
+            <%= label_tag "question[remove_files_#{index}]", "Удалить" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!-- Поле для новых файлов -->
+    <div class="field">
+      <%= f.label :files %>
+      <%= f.file_field :files, multiple: true %>
+    </div>
+
+  </div>
   <%= f.submit "Submit question!", class: 'btn btn-primary' %>
 <% end %>

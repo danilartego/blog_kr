@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Blog Тест" %></title>
+    <title><%= full_title(yield(:page_title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -20,21 +20,20 @@
     <%# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script> %>
   </head>
   <body>
+
     <header class="p-3 bg-dark text-white">
       <div class="container">
-        <nav class="d-flex flex-wrap justify-content-center align-items-center justify-content-lg-start">
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><%= link_to 'Home', root_path, class: "nav-link px-2 text-white" %></li>
-            <li><%= link_to 'Questions', questions_path, class: "nav-link px-2 text-white" %></li>
-          </ul>
-        </nav>
+        <%= render 'shared/menu' %>
       </div>
     </header>
+
     <main class="container mt-3">
       <% flash.each do |key, value| %>
         <%= tag.div value, class: "alert alert-#{key}", role: "alert" %>
       <% end %>
+
       <%= yield %>
     </main>
+    
   </body>
 </html>

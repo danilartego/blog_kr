@@ -1,33 +1,39 @@
 <h1 class="mb-4"><%= @question.title %></h1>
+
 <time datetime="<%= @question.formatted_created_at %>">
   Created: <%= @question.formatted_created_at %> <br>
   Updated: <%= time_ago_in_words(@question.updated_at) %> ago
 </time>
-<p class="my-4"><%= @question.body %></p>
+
+<div class="my-4">
+  <%= sanitize @question.body %>
+</div>
+
+<% @question.images.each do |image| %>
+  <%= image_tag image, style: 'max-width: 300px;' %>
+<% end %>
+
+<% @question.files.each do |file| %>
+  <p>
+    <%= link_to file.filename, rails_blob_path(file, disposition: 'attachment') %>
+  </p>
+<% end %>
+
 <%= link_to 'Редактировать', edit_question_path(@question), class: "btn btn-primary"  %>
 <%= button_to 'Удалить', question_path(@question), class: "btn btn-danger mt-2", method: :delete, 
             data: { turbo_confirm: "Вы уверены?" }  %>
 
 <hr class="my-4">
+
 <h2> Создать ответ на вопрос </h2>
 
 <%= render 'answers/form' %>
 
 <h2 class="my-5"> Ответы на вопрос </h2>
 
-<% @answers.each do |answer| %>
-<article class="mb-3 card">
-  <div class="card-body">
-    <section class="cadr=text">
-    <small><time datetime="<%= answer.formatted_created_at %>">
-    Created: <%= answer.formatted_created_at %> </time></small>
-    <p class="mt-2 mb-3"><%= answer.body %></p>
-    </section>
+<%== pagy_bootstrap_nav(@pagy) %>
 
-  
-  <%= link_to 'Редактировать', edit_question_answer_path(@question, answer), class: "btn btn-info btn-sm mb-2"   %>
-  <%= button_to 'Удалить', question_answer_path(@question, answer), class: "btn btn-danger btn-sm", method: :delete, data: { turbo_confirm: "Вы уверены?" }  %>
-  </div>
-  </article>
-  
-<% end %>
+<%= render partial: 'answers/answer', collection: @answers,
+    as: :answer, locals: { question: @question } %>
+
+<%== pagy_bootstrap_nav(@pagy) %>

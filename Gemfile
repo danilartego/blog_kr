@@ -54,6 +54,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'faker', '~> 3.0' # Generates fake data for testing
 end
 
 group :test do
@@ -65,3 +66,4 @@ end
 gem "dartsass-rails"
 gem 'bootstrap', '~> 5.3', '>= 5.3.3'
 gem 'foreman'
+gem 'pagy', '~> 9.3' # omit patch digit

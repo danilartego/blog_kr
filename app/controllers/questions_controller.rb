@@ -2,11 +2,29 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    @questions = Question.all.order(created_at: :desc)
+    @pagy, @questions = pagy(Question.all.order(created_at: :desc))
+    # @questions = Question.all.order(created_at: :desc)
   end
 
   def update
     if @question.update(question_params)
+
+      # Удаление отмеченных изображений
+      if params[:question][:image_ids]
+        params[:question][:image_ids].each do |id|
+          image = @question.images.find(id)
+          image.purge
+        end
+      end
+
+      # Удаление отмеченных файлов
+      if params[:question][:file_ids]
+        params[:question][:file_ids].each do |id|
+          file = @question.files.find(id)
+          file.purge
+        end
+      end
+
       flash[:success] = "Question was successfully updated."
       redirect_to questions_path
     else
@@ -39,13 +57,14 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = @question.answers.build
-    @answers = @question.answers.order(created_at: :desc)
+    # @answers = @question.answers.order(created_at: :desc)
+    @pagy, @answers = pagy(@question.answers.order(created_at: :desc))
   end
 
   private
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, images: [], files: [])
   end
 
   def set_question
