@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     @pagy, @questions = pagy(Question.all.order(created_at: :desc))
+
     # @questions = Question.all.order(created_at: :desc)
   end
 
