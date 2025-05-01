@@ -9,13 +9,14 @@
   <ul class="nav mb-2 justify-content-center mb-md-0">
 
     <% if user_signed_in? %>
-      <li> <%= link_to "#{current_user.name}", user_path(current_user), class: "nav-link px-2 text-white" %> </li>
+      <li> <%= link_to "#{current_user.name == '' ? current_user.email : current_user.name}", user_path(current_user), class: "nav-link px-2 text-white" %> </li> 
     <% end %>
 
     <% if user_signed_in? %>
-      <li> <%= link_to 'Logout', user_path(current_user), data: { turbo_method: :delete }, class: "nav-link px-2 text-white" %> </li>
+      <li> <%= link_to 'Logout', session_path(current_user), data: { turbo_method: :delete }, class: "nav-link px-2 text-white" %> </li>
     <% else %>
       <li><%= link_to 'Sign Up', new_user_path, class: "nav-link px-2 text-white" %></li>
+      <li><%= link_to 'Log In', new_session_path, class: "nav-link px-2 text-white" %></li>
     <% end %>
   </ul>
 

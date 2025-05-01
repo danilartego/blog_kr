@@ -19,9 +19,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
-    flash[:success] = "You have logged out successfully."
-    redirect_to root_path, notice: "User was successfully destroyed."
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = "User was successfully deleted."
+    redirect_to root_path
   end
 
   private
