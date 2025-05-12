@@ -2,7 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @questions = pagy(Question.all.order(created_at: :desc))
+    @pagy, @questions = pagy Question.all.order(created_at: :desc)
+    @questions = @questions.decorate
 
     # @questions = Question.all.order(created_at: :desc)
   end
@@ -57,9 +58,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question = @question.decorate
     @answer = @question.answers.build
     # @answers = @question.answers.order(created_at: :desc)
-    @pagy, @answers = pagy(@question.answers.order(created_at: :desc))
+    @pagy, @answers = pagy @question.answers.order(created_at: :desc)
+    @answers = @answers.decorate
   end
 
   private

@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+# ruby 3.3.7
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -32,7 +34,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
+# gem "kamal", require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
@@ -54,7 +56,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'faker', '~> 3.0' # Generates fake data for testing
+  gem "faker", "~> 3.0" # Generates fake data for testing
 end
 
 group :test do
@@ -64,6 +66,8 @@ group :test do
 end
 
 gem "dartsass-rails"
-gem 'bootstrap', '~> 5.3', '>= 5.3.3'
-gem 'foreman'
-gem 'pagy', '~> 9.3' # omit patch digit
+gem "bootstrap", "~> 5.3", ">= 5.3.3"
+gem "foreman"
+gem "pagy", "~> 9.3" # omit patch digit
+
+gem "draper", "~> 4.0"

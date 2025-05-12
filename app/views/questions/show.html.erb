@@ -32,9 +32,9 @@
 
 <h2 class="my-5"> Ответы на вопрос </h2>
 
-<%== pagy_bootstrap_nav(@pagy) %>
+<%= pagination @pagy  %>
 
 <%= render partial: 'answers/answer', collection: @answers,
     as: :answer, locals: { question: @question } %>
 
-<%== pagy_bootstrap_nav(@pagy) %>
+<%= pagination @pagy  %>
