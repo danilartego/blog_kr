@@ -9,13 +9,14 @@ class SessionsController < ApplicationController
     user = User.find_by email: params[:email]
     if user&.authenticate(params[:password])
       sign_in user
+      remember user if params[:remember_me] == '1' # remember user if they check the box
       flash[:success] = "Welcome to the app, #{current_user.name}"
       redirect_to root_path
     else
       flash[:warning] = "incorrect email and/or password"
-      redirect_to new_session_path
+      render :new, status: :unprocessable_entity
     end
-  end
+  end 
 
   def destroy
     sign_out
