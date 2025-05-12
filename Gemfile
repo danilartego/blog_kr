@@ -66,7 +66,7 @@ group :test do
 end
 
 gem "dartsass-rails"
-gem "bootstrap", "~> 5.3", ">= 5.3.3"
+gem "bootstrap", "~> 5.3"
 gem "foreman"
 gem "pagy", "~> 9.3" # omit patch digit
 
