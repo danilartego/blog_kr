@@ -69,7 +69,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'bootstrap', '~> 5.3', '>= 5.3.3'
+gem 'bootstrap', '~> 5.3'
 gem 'dartsass-rails'
 gem 'foreman'
 gem 'pagy', '~> 9.3' # omit patch digit
