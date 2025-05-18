@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   attr_accessor :old_password, :remember_token
+
   has_secure_password validations: false
 
   # validates :name, presence: true
@@ -21,8 +24,8 @@ class User < ApplicationRecord
   end
 
   def remember_token_authenticated?(remember_token)
-    return false unless remember_token_digest.present?
-    
+    return false if remember_token_digest.blank?
+
     BCrypt::Password.new(remember_token_digest).is_password?(remember_token)
   end
 
@@ -36,7 +39,7 @@ class User < ApplicationRecord
   def correct_old_password
     return if BCrypt::Password.new(password_digest_was).is_password?(old_password)
 
-    errors.add :old_password, "is incorrect"
+    errors.add :old_password, 'is incorrect'
   end
 
   # def password_complexity
@@ -47,6 +50,6 @@ class User < ApplicationRecord
   # end
 
   def password_presence
-    errors.add(:password, :blank) unless password_digest.present?
+    errors.add(:password, :blank) if password_digest.blank?
   end
 end
